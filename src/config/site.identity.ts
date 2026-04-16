@@ -1,10 +1,10 @@
 export const siteIdentity = {
   code: process.env.NEXT_PUBLIC_SITE_CODE || 'hd9m2q7x4v',
   name: process.env.NEXT_PUBLIC_SITE_NAME || 'Houses Decors',
-  tagline: process.env.NEXT_PUBLIC_SITE_TAGLINE || 'Image discovery platform',
+  tagline: process.env.NEXT_PUBLIC_SITE_TAGLINE || 'Image-led home and decor inspiration',
   description:
     process.env.NEXT_PUBLIC_SITE_DESCRIPTION ||
-    'An image-led platform for galleries, visual publishing, and media-rich discovery.',
+    'A gallery-style site for visual inspiration, design images, and decor discovery.',
   domain: process.env.NEXT_PUBLIC_SITE_DOMAIN || 'housesdecors.com',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://housesdecors.com',
   ogImage: process.env.NEXT_PUBLIC_SITE_OG_IMAGE || '/og-default.png',
