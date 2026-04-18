@@ -1,32 +1,32 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FileText, Building2, Tag, Users } from 'lucide-react'
+import { Image as ImageIcon, Heart, Layers, Users } from 'lucide-react'
 
 const stats = [
   {
-    icon: FileText,
-    value: '25K+',
-    label: 'Articles Published',
-    description: 'Quality content created by our community'
+    icon: ImageIcon,
+    value: '18K+',
+    label: 'Gallery images',
+    description: 'Rooms, details, and decor references'
   },
   {
-    icon: Building2,
-    value: '12K+',
-    label: 'Business Listings',
-    description: 'Verified businesses and services'
+    icon: Layers,
+    value: '420+',
+    label: 'Curated sets',
+    description: 'Mood boards and style collections'
   },
   {
-    icon: Tag,
-    value: '50K+',
-    label: 'Classified Ads',
-    description: 'Items listed and sold'
+    icon: Heart,
+    value: '32K+',
+    label: 'Saves & likes',
+    description: 'Ideas bookmarked by the community'
   },
   {
     icon: Users,
-    value: '100K+',
-    label: 'Active Users',
-    description: 'Growing community members'
+    value: '9K+',
+    label: 'Contributors',
+    description: 'Photographers and home stylists'
   }
 ]
 
@@ -36,10 +36,10 @@ export function StatsSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
           <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-            Platform in Numbers
+            The gallery in numbers
           </h2>
           <p className="mt-2 text-muted-foreground">
-            Join our thriving community of creators and businesses
+            A focused image community for interior inspiration
           </p>
         </div>
 

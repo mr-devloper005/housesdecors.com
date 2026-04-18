@@ -56,6 +56,17 @@ const heroClasses = {
     primary: 'bg-[#18210f] text-[#ebf5d9] hover:bg-[#25331a]',
     secondary: 'border border-[#dce5c2] bg-white text-[#18210f] hover:bg-[#f4f7df]',
   },
+  'forest-gallery': {
+    section: 'border-b border-[rgba(27,67,50,0.12)] bg-[linear-gradient(180deg,#faf8f4_0%,#f3f0e8_42%,#ffffff_100%)] text-[#0f1f18]',
+    overlay: 'bg-[radial-gradient(circle_at_top_left,rgba(27,67,50,0.14),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(45,106,79,0.1),transparent_30%)]',
+    grid: 'lg:grid-cols-[1.05fr_0.95fr]',
+    card: 'border border-[rgba(27,67,50,0.1)] bg-white/92 shadow-[0_26px_80px_rgba(27,67,50,0.1)]',
+    title: 'text-[#0f1f18]',
+    body: 'text-[#3d5349]',
+    badge: 'bg-[#1b4332] text-[#f4f7f5]',
+    primary: 'bg-[#1b4332] text-white hover:bg-[#143728]',
+    secondary: 'border border-[rgba(27,67,50,0.2)] bg-white text-[#1b4332] hover:bg-[#eef4f1]',
+  },
 } as const;
 
 export function HeroSection({ images, tasks }: { images: string[]; tasks: TaskConfig[] }) {

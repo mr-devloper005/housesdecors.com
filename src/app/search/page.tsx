@@ -72,27 +72,28 @@ export default async function SearchPage({
 
   return (
     <PageShell
+      eyebrow="Discovery"
       title="Search"
       description={
         query
-          ? `Results for "${query}"`
-          : "Browse the latest posts across every task."
+          ? `Results for “${query}” across imagery and related posts.`
+          : "Search by room, material, color, or mood—same forest-on-cream system as the rest of the site."
       }
       actions={
-        <form action="/search" className="flex w-full gap-2 sm:w-auto">
+        <form action="/search" className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
           <input type="hidden" name="master" value="1" />
           {category ? <input type="hidden" name="category" value={category} /> : null}
           {task ? <input type="hidden" name="task" value={task} /> : null}
           <div className="relative w-full sm:w-80">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#5a6f66]" />
             <Input
               name="q"
               defaultValue={query}
-              placeholder="Search across tasks..."
-              className="h-11 pl-9"
+              placeholder="Try “limewash”, “japandi”, or “kitchen island”"
+              className="h-11 border-[#1b4332]/15 pl-9 shadow-sm"
             />
           </div>
-          <Button type="submit" className="h-11">
+          <Button type="submit" className="h-11 rounded-full bg-[#1b4332] px-6 hover:bg-[#143728]">
             Search
           </Button>
         </form>
@@ -107,8 +108,11 @@ export default async function SearchPage({
           })}
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-          No matching posts yet.
+        <div className="rounded-[1.75rem] border border-dashed border-[#1b4332]/20 bg-[#fafcf9] px-8 py-14 text-center">
+          <p className="text-lg font-semibold text-[#0f1f18]">No matches yet</p>
+          <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-[#3d5349]">
+            Broaden your terms or clear filters—our gallery is always growing, and similar moods often hide under different names.
+          </p>
         </div>
       )}
     </PageShell>

@@ -2,76 +2,76 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Independent reading platform',
+    tagline: 'Interior inspiration, image-first',
   },
   footer: {
-    tagline: 'Stories, resources, and discoverable posts',
+    tagline: 'Curated home & decor imagery',
   },
   hero: {
-    badge: 'Latest stories and visuals',
-    title: ['A thoughtful home for', 'stories, visuals, and discovery.'],
+    badge: 'Rooms, palettes, and ideas',
+    title: ['Discover decor', 'through immersive imagery.'],
     description:
-      'Explore fresh articles, image-led posts, and discoverable content across the platform through a calmer and clearer browsing experience.',
+      'Browse a calm, gallery-style feed of interior and decor photography—organized for quick scanning, mood boards, and saving what you love.',
     primaryCta: {
-      label: 'Read latest stories',
-      href: '/articles',
-    },
-    secondaryCta: {
-      label: 'Explore visuals',
+      label: 'Explore gallery',
       href: '/images',
     },
-    searchPlaceholder: 'Search stories, visuals, listings, and more',
+    secondaryCta: {
+      label: 'Search images',
+      href: '/search',
+    },
+    searchPlaceholder: 'Search rooms, styles, colors, and moods',
     focusLabel: 'Focus',
     featureCardBadge: 'latest cover rotation',
-    featureCardTitle: 'Latest posts shape the visual identity of the homepage.',
+    featureCardTitle: 'Fresh imagery sets the tone for every visit.',
     featureCardDescription:
-      'Recent images and stories stay at the center of the experience without changing any core platform behavior.',
+      'Large visuals, soft spacing, and clear hierarchy keep attention on the photos—not on chrome.',
   },
   home: {
     metadata: {
-      title: 'Stories, visuals, and discoverable content',
+      title: 'Houses Decors — interior & decor imagery',
       description:
-        'Explore articles, images, listings, and curated posts through a cleaner reading-first experience.',
-      openGraphTitle: 'Stories, visuals, and discoverable content',
+        'A gallery-first experience for interior design inspiration: browse images, filter visually, and save favorites.',
+      openGraphTitle: 'Houses Decors — interior & decor imagery',
       openGraphDescription:
-        'Discover articles, visual posts, and connected content through a calmer reading-first experience.',
-      keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
+        'Discover curated home and decor photography in a premium, easy-to-scan layout.',
+      keywords: ['interior design', 'home decor', 'inspiration gallery', 'decor images', 'room ideas'],
     },
-    introBadge: 'About the platform',
-    introTitle: 'Built for reading, browsing, and connecting different kinds of content.',
+    introBadge: 'About this gallery',
+    introTitle: 'Built for people who think in color, texture, and light.',
     introParagraphs: [
-      'This site brings together article-style reading, visual browsing, and structured discovery so visitors can move naturally between different content types.',
-      'Instead of separating stories, visuals, and supporting resources into disconnected surfaces, the platform keeps them connected in one place with consistent navigation and easier exploration.',
-      'Whether someone starts with a story, an image-led post, a listing, or a resource page, they can keep discovering related content without friction.',
+      'This site centers on imagery: full-bleed photos, generous spacing, and typography that stays out of the way.',
+      'Navigation stays minimal so you can move from hero to grid to detail pages without friction.',
+      'Whether you are sourcing a renovation or collecting references, the layout rewards visual scanning first.',
     ],
     sideBadge: 'At a glance',
     sidePoints: [
-      'Reading-first homepage with stronger emphasis on stories and imagery.',
-      'Connected sections for articles, visuals, listings, and supporting resources.',
-      'Cleaner browsing rhythm designed to make exploration feel easier.',
-      'Lightweight interactions that keep the experience fast and readable.',
+      'Gallery-first homepage with masonry-friendly rhythm.',
+      'Forest green accents on warm cream for a grounded, premium feel.',
+      'Lightweight motion—subtle fades, no gimmicky effects.',
+      'Fast on mobile: optimized images and simple interactions.',
     ],
     primaryLink: {
-      label: 'Browse articles',
-      href: '/articles',
+      label: 'Open gallery',
+      href: '/images',
     },
     secondaryLink: {
-      label: 'See visuals',
-      href: '/images',
+      label: 'Search',
+      href: '/search',
     },
   },
   cta: {
-    badge: 'Start exploring',
-    title: 'Explore articles, visuals, and resources through one connected experience.',
+    badge: 'Start collecting',
+    title: 'Save ideas, compare palettes, and build your own visual library.',
     description:
-      'Move between articles, image-led posts, listings, and resources through one clearer and more connected visual system.',
+      'Create an account to keep favorites synced in your browser and return to the imagery that fits your project.',
     primaryCta: {
-      label: 'Get Started Free',
+      label: 'Join free',
       href: '/register',
     },
     secondaryCta: {
-      label: 'Contact Sales',
-      href: '/contact',
+      label: 'Browse gallery',
+      href: '/images',
     },
   },
   taskSectionHeading: 'Latest {label}',
@@ -155,14 +155,14 @@ export const taskIntroCopy: Record<
   image: {
     title: 'Image-led posts and visual stories',
     paragraphs: [
-      'Images take the lead in this section through galleries, visual posts, and story-led content where imagery carries the experience.',
-      'These posts connect with articles, listings, and other sections so visuals can act as entry points into deeper content.',
-      'Browse the latest visual updates, then continue into related stories or supporting pages for more context.',
+      'Imagery leads here: full-width photos, gallery pacing, and tags that help you scan moods, palettes, and room types quickly.',
+      'Open any post for a focused view—then jump to search when you want to narrow by keyword or style.',
+      'Save what resonates and return anytime; the layout stays calm so the photos stay loud.',
     ],
     links: [
-      { label: 'Read articles', href: '/articles' },
-      { label: 'Explore listings', href: '/listings' },
-      { label: 'Open classifieds', href: '/classifieds' },
+      { label: 'Search the gallery', href: '/search' },
+      { label: 'Upload an image', href: '/create/image' },
+      { label: 'About the site', href: '/about' },
     ],
   },
   profile: {
