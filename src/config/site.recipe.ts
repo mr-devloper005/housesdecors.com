@@ -2,9 +2,9 @@ import type { SiteRecipe } from '@/design/factory/recipe-types'
 
 export const SITE_RECIPE: SiteRecipe = {
   productFamily: 'visual',
-  themePack: 'pinterest-creator',
+  themePack: 'housesdecors-visual',
   homepageTemplate: 'image-profile-home',
-  navbarTemplate: 'floating-bar',
+  navbarTemplate: 'compact-bar',
   footerTemplate: 'dense-footer',
   motionPack: 'studio-stagger',
   primaryTask: 'image',

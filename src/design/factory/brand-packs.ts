@@ -37,4 +37,13 @@ export const BRAND_PACKS: Record<BrandPack['key'], BrandPack> = {
     surfaceClassName: 'factory-surface-market',
     accentClassName: 'factory-accent-market',
   },
+  'forest-atelier': {
+    key: 'forest-atelier',
+    displayName: 'Forest Atelier',
+    bodyClassName: 'factory-brand-forest',
+    fontClassName: 'factory-font-directory',
+    paletteClassName: 'factory-palette-directory',
+    surfaceClassName: 'factory-surface-directory',
+    accentClassName: 'factory-accent-directory',
+  },
 }
