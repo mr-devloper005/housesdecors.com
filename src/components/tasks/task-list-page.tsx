@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Building2, FileText, Image as ImageIcon, LayoutGrid, Tag, User } from 'lucide-react'
+import { ArrowRight, Building2, FileText, Image as ImageIcon, LayoutGrid, Plus, Tag, User } from 'lucide-react'
 import { NavbarShell } from '@/components/shared/navbar-shell'
 import { Footer } from '@/components/shared/footer'
 import { TaskListClient } from '@/components/tasks/task-list-client'
@@ -29,8 +29,10 @@ const variantShells = {
   'listing-showcase': 'bg-[linear-gradient(180deg,#ffffff_0%,#f4f9ff_100%)]',
   'article-editorial': 'bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.08),transparent_20%),linear-gradient(180deg,#fff8ef_0%,#ffffff_100%)]',
   'article-journal': 'bg-[linear-gradient(180deg,#fffdf9_0%,#f7f1ea_100%)]',
-  'image-masonry': 'bg-[linear-gradient(180deg,#09101d_0%,#111c2f_100%)] text-white',
-  'image-portfolio': 'bg-[linear-gradient(180deg,#07111f_0%,#13203a_100%)] text-white',
+  'image-masonry':
+    'bg-[linear-gradient(180deg,#faf8f4_0%,#eef4f0_42%,#ffffff_100%)] text-[#122821]',
+  'image-portfolio':
+    'bg-[linear-gradient(180deg,#f7f4ef_0%,#edf3ee_45%,#ffffff_100%)] text-[#122821]',
   'profile-creator': 'bg-[linear-gradient(180deg,#0a1120_0%,#101c34_100%)] text-white',
   'profile-business': 'bg-[linear-gradient(180deg,#f6fbff_0%,#ffffff_100%)]',
   'classified-bulletin': 'bg-[linear-gradient(180deg,#edf3e4_0%,#ffffff_100%)]',
@@ -60,7 +62,8 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
   const shellClass = variantShells[layoutKey as keyof typeof variantShells] || 'bg-background'
   const Icon = taskIcons[task] || LayoutGrid
 
-  const isDark = ['image-masonry', 'image-portfolio', 'profile-creator'].includes(layoutKey)
+  const isImageLight = layoutKey === 'image-masonry' || layoutKey === 'image-portfolio'
+  const isDark = ['profile-creator'].includes(layoutKey)
   const ui = isDark
     ? {
         muted: 'text-slate-300',
@@ -69,7 +72,15 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
         input: 'border-white/10 bg-white/6 text-white',
         button: 'bg-white text-slate-950 hover:bg-slate-200',
       }
-    : layoutKey.startsWith('article') || layoutKey.startsWith('sbm')
+    : isImageLight
+      ? {
+          muted: 'text-[#3d5349]',
+          panel: 'border border-[#1b4332]/12 bg-white shadow-[0_20px_55px_rgba(27,67,50,0.08)]',
+          soft: 'border border-[#1b4332]/10 bg-[#f3faf6]',
+          input: 'border border-[#1b4332]/15 bg-white text-[#0f1f18]',
+          button: 'bg-[#1b4332] text-white hover:bg-[#143728]',
+        }
+      : layoutKey.startsWith('article') || layoutKey.startsWith('sbm')
       ? {
           muted: 'text-[#72594a]',
           panel: 'border border-[#dbc6b6] bg-white/90',
@@ -170,18 +181,48 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
         ) : null}
 
         {layoutKey === 'image-masonry' || layoutKey === 'image-portfolio' ? (
-          <section className="mb-12 grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <section className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
             <div>
-              <div className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] ${ui.soft}`}>
-                <Icon className="h-3.5 w-3.5" /> Visual feed
+              <div className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#1b4332] ${ui.soft}`}>
+                <Icon className="h-3.5 w-3.5" /> Gallery
               </div>
-              <h1 className="mt-5 text-5xl font-semibold tracking-[-0.05em]">{taskConfig?.description || 'Latest posts'}</h1>
-              <p className={`mt-5 max-w-2xl text-sm leading-8 ${ui.muted}`}>This surface leans into stronger imagery, larger modules, and more expressive spacing so visual content feels materially different from reading and directory pages.</p>
+              <h1 className="mt-5 text-4xl font-semibold tracking-[-0.05em] text-[#0f1f18] sm:text-5xl">
+                {taskConfig?.description || 'Latest posts'}
+              </h1>
+              <p className={`mt-5 max-w-2xl text-sm leading-8 sm:text-base ${ui.muted}`}>
+                Scroll a calm, forest-on-cream grid: large tiles for hero moments, tight metadata, and filters that stay out of the way so photography stays central.
+              </p>
+              {task === 'image' ? (
+                <div className="mt-6">
+                  <Link
+                    href="/create/image"
+                    className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold shadow-[0_14px_32px_rgba(27,67,50,0.18)] transition-transform hover:-translate-y-0.5 ${ui.button}`}
+                  >
+                    <Plus className="h-4 w-4" />
+                    Create
+                  </Link>
+                </div>
+              ) : null}
+              <div className="mt-8 flex flex-wrap gap-2">
+                {['Minimal', 'Scandi', 'Warm tones', 'Kitchen', 'Bedroom'].map((tag) => (
+                  <Link
+                    key={tag}
+                    href={`/search?q=${encodeURIComponent(tag)}`}
+                    className="rounded-full border border-[#1b4332]/14 bg-white/90 px-3 py-1.5 text-xs font-semibold text-[#1b4332] shadow-sm transition-colors hover:border-[#1b4332]/30 hover:bg-[#eef4f1]"
+                  >
+                    {tag}
+                  </Link>
+                ))}
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className={`min-h-[220px] rounded-[2rem] ${ui.panel}`} />
-              <div className={`min-h-[220px] rounded-[2rem] ${ui.soft}`} />
-              <div className={`col-span-2 min-h-[120px] rounded-[2rem] ${ui.panel}`} />
+              <div
+                className={`min-h-[200px] rounded-[2rem] sm:min-h-[220px] ${ui.panel} bg-gradient-to-br from-[#e8f2ec] via-white to-[#f4f1ea]`}
+              />
+              <div className={`min-h-[200px] rounded-[2rem] sm:min-h-[220px] ${ui.soft} bg-gradient-to-br from-white to-[#dfece6]`} />
+              <div
+                className={`col-span-2 min-h-[100px] rounded-[2rem] sm:min-h-[120px] ${ui.panel} bg-gradient-to-r from-[#1b4332]/6 via-transparent to-[#2d6a4f]/10`}
+              />
             </div>
           </section>
         ) : null}

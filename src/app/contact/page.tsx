@@ -27,11 +27,11 @@ function getTone(kind: ReturnType<typeof getProductKind>) {
   }
   if (kind === 'visual') {
     return {
-      shell: 'bg-[#07101f] text-white',
-      panel: 'border border-white/10 bg-white/6',
-      soft: 'border border-white/10 bg-white/5',
-      muted: 'text-slate-300',
-      action: 'bg-[#8df0c8] text-[#07111f] hover:bg-[#77dfb8]',
+      shell: 'bg-[#f4f1ea] text-[#122821]',
+      panel: 'border border-[#1b4332]/12 bg-white shadow-sm',
+      soft: 'border border-[#1b4332]/10 bg-white/85',
+      muted: 'text-[#3d5349]',
+      action: 'bg-[#1b4332] text-white hover:bg-[#143728]',
     }
   }
   return {
@@ -66,9 +66,9 @@ export default function ContactPage() {
           ]
         : productKind === 'visual'
           ? [
-              { icon: ImageIcon, title: 'Creator collaborations', body: 'Discuss gallery launches, creator features, and visual campaigns.' },
-              { icon: Sparkles, title: 'Licensing and use', body: 'Reach out about usage rights, commercial requests, and visual partnerships.' },
-              { icon: Mail, title: 'Media kits', body: 'Request creator decks, editorial support, or visual feature placement.' },
+              { icon: ImageIcon, title: 'Gallery & editorial', body: 'Pitch a home tour, room reveal, or seasonal lookbook—we reply with clear next steps.' },
+              { icon: Sparkles, title: 'Licensing & partnerships', body: 'Commercial use, brand collaborations, and high-res asset requests for press or retail.' },
+              { icon: Mail, title: 'Product & support', body: 'Accounts, uploads, search, or anything blocking your workflow on the site.' },
             ]
           : [
               { icon: Bookmark, title: 'Collection submissions', body: 'Suggest resources, boards, and links that deserve a place in the library.' },
@@ -82,9 +82,11 @@ export default function ContactPage() {
       <main className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Contact {SITE_CONFIG.name}</p>
-            <h1 className="mt-4 text-5xl font-semibold tracking-[-0.05em]">A support page that matches the product, not a generic contact form.</h1>
-            <p className={`mt-5 max-w-2xl text-sm leading-8 ${tone.muted}`}>Tell us what you are trying to publish, fix, or launch. We will route it through the right lane instead of forcing every request into the same support bucket.</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8d7f5e]">Contact</p>
+            <h1 className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-[#0f1f18] sm:text-5xl">Let’s talk about imagery, spaces, and partnerships.</h1>
+            <p className={`mt-5 max-w-2xl text-sm leading-8 sm:text-base ${tone.muted}`}>
+              Share a short note about your project—stylist inquiry, press request, or technical help—and we’ll get back with the right person on our side.
+            </p>
             <div className="mt-8 space-y-4">
               {lanes.map((lane) => (
                 <div key={lane.title} className={`rounded-[1.6rem] p-5 ${tone.soft}`}>
@@ -96,14 +98,20 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className={`rounded-[2rem] p-7 ${tone.panel}`}>
-            <h2 className="text-2xl font-semibold">Send a message</h2>
+          <div className={`rounded-[2rem] p-7 sm:p-8 ${tone.panel}`}>
+            <h2 className="text-xl font-semibold text-[#0f1f18] sm:text-2xl">Send a message</h2>
+            <p className={`mt-2 text-sm ${tone.muted}`}>We read every note—no ticket maze, no anonymous bot.</p>
             <form className="mt-6 grid gap-4">
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Your name" />
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Email address" />
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="What do you need help with?" />
-              <textarea className="min-h-[180px] rounded-2xl border border-current/10 bg-transparent px-4 py-3 text-sm" placeholder="Share the full context so we can respond with the right next step." />
-              <button type="submit" className={`inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-semibold ${tone.action}`}>Send message</button>
+              <input className="h-12 rounded-xl border border-[#1b4332]/15 bg-white px-4 text-sm text-[#0f1f18] placeholder:text-[#5a6f66]" placeholder="Your name" />
+              <input className="h-12 rounded-xl border border-[#1b4332]/15 bg-white px-4 text-sm text-[#0f1f18] placeholder:text-[#5a6f66]" placeholder="Email address" type="email" />
+              <input className="h-12 rounded-xl border border-[#1b4332]/15 bg-white px-4 text-sm text-[#0f1f18] placeholder:text-[#5a6f66]" placeholder="Topic (e.g. press, partnership, support)" />
+              <textarea
+                className="min-h-[180px] rounded-2xl border border-[#1b4332]/15 bg-white px-4 py-3 text-sm text-[#0f1f18] placeholder:text-[#5a6f66]"
+                placeholder="Tell us about timelines, links to your work, or what you’d like to see on the gallery."
+              />
+              <button type="submit" className={`inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-semibold transition-transform duration-200 hover:-translate-y-0.5 ${tone.action}`}>
+                Send message
+              </button>
             </form>
           </div>
         </section>

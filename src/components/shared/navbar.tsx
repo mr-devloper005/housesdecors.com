@@ -18,6 +18,11 @@ const NavbarAuthControls = dynamic(() => import('@/components/shared/navbar-auth
   loading: () => null,
 })
 
+const staticPageLinks = [
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+] as const
+
 const taskIcons: Record<TaskKey, any> = {
   article: FileText,
   listing: Building2,
@@ -33,12 +38,12 @@ const taskIcons: Record<TaskKey, any> = {
 
 const variantClasses = {
   'compact-bar': {
-    shell: 'border-b border-slate-200/80 bg-white/88 text-slate-950 backdrop-blur-xl',
-    logo: 'rounded-2xl border border-slate-200 bg-white shadow-sm',
-    active: 'bg-slate-950 text-white',
-    idle: 'text-slate-600 hover:bg-slate-100 hover:text-slate-950',
-    cta: 'rounded-full bg-slate-950 text-white hover:bg-slate-800',
-    mobile: 'border-t border-slate-200/70 bg-white/95',
+    shell: 'border-b border-[#1b4332]/10 bg-[rgba(252,251,248,0.92)] text-[#0f1f18] backdrop-blur-xl',
+    logo: 'rounded-2xl border border-[#1b4332]/12 bg-white shadow-sm',
+    active: 'bg-[#1b4332] text-white',
+    idle: 'text-[#3d5349] hover:bg-[#eef4f1] hover:text-[#0f1f18]',
+    cta: 'rounded-full bg-[#1b4332] text-white hover:bg-[#143728]',
+    mobile: 'border-t border-[#1b4332]/10 bg-[#fcfcf8]/98',
   },
   'editorial-bar': {
     shell: 'border-b border-[#d7c4b3] bg-[#fff7ee]/90 text-[#2f1d16] backdrop-blur-xl',
@@ -68,13 +73,13 @@ const variantClasses = {
 
 const directoryPalette = {
   'directory-clean': {
-    shell: 'border-b border-slate-200 bg-white/94 text-slate-950 shadow-[0_1px_0_rgba(15,23,42,0.04)] backdrop-blur-xl',
-    logo: 'rounded-2xl border border-slate-200 bg-slate-50',
-    nav: 'text-slate-600 hover:text-slate-950',
-    search: 'border border-slate-200 bg-slate-50 text-slate-600',
-    cta: 'bg-slate-950 text-white hover:bg-slate-800',
-    post: 'border border-slate-200 bg-white text-slate-950 hover:bg-slate-50',
-    mobile: 'border-t border-slate-200 bg-white',
+    shell: 'border-b border-[#1b4332]/10 bg-[rgba(252,251,248,0.96)] text-[#0f1f18] shadow-[0_1px_0_rgba(27,67,50,0.05)] backdrop-blur-xl',
+    logo: 'rounded-2xl border border-[#1b4332]/12 bg-white',
+    nav: 'text-[#3d5349] hover:text-[#0f1f18]',
+    search: 'border border-[#1b4332]/12 bg-white text-[#3d5349]',
+    cta: 'bg-[#1b4332] text-white hover:bg-[#143728]',
+    post: 'border border-[#1b4332]/12 bg-white text-[#0f1f18] hover:bg-[#eef4f1]',
+    mobile: 'border-t border-[#1b4332]/10 bg-[#fcfcf8]',
   },
   'market-utility': {
     shell: 'border-b border-[#d7deca] bg-[#f4f6ef]/96 text-[#1f2617] shadow-[0_1px_0_rgba(64,76,34,0.06)] backdrop-blur-xl',
@@ -116,7 +121,7 @@ export function Navbar() {
           <div className="flex min-w-0 items-center gap-4">
             <Link href="/" className="flex shrink-0 items-center gap-3">
               <div className={cn('flex h-12 w-12 items-center justify-center overflow-hidden p-1.5', palette.logo)}>
-                <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
+                <img src="/favicon.png?v=20260418" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
               </div>
               <div className="min-w-0 hidden sm:block">
                 <span className="block truncate text-xl font-semibold">{SITE_CONFIG.name}</span>
@@ -133,18 +138,26 @@ export function Navbar() {
                   </Link>
                 )
               })}
+              {staticPageLinks.map(({ href, label }) => {
+                const isActive = pathname === href || pathname.startsWith(`${href}/`)
+                return (
+                  <Button key={href} variant="ghost" size="sm" asChild className={cn('rounded-full px-3 text-sm font-semibold', isActive ? 'bg-foreground text-background' : `${palette.nav} hover:bg-[#eef4f1]`)}>
+                    <Link href={href}>{label}</Link>
+                  </Button>
+                )
+              })}
             </div>
           </div>
 
           <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
-            <div className={cn('flex w-full max-w-xl items-center gap-3 rounded-full px-4 py-3', palette.search)}>
-              <Search className="h-4 w-4" />
-              <span className="text-sm">Find businesses, spaces, and local services</span>
+            <Link href="/search" className={cn('flex w-full max-w-xl items-center gap-3 rounded-full px-4 py-3 transition-colors hover:opacity-95', palette.search)}>
+              <Search className="h-4 w-4 shrink-0" />
+              <span className="text-sm">Search rooms, palettes, styles, and moods</span>
               <div className="ml-auto hidden items-center gap-1 text-xs opacity-75 md:flex">
                 <MapPin className="h-3.5 w-3.5" />
-                Local discovery
+                Image discovery
               </div>
-            </div>
+            </Link>
           </div>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
@@ -165,7 +178,7 @@ export function Navbar() {
                 <Button size="sm" asChild className={cn('rounded-full', palette.cta)}>
                   <Link href="/register">
                     <Plus className="mr-1 h-4 w-4" />
-                    Add Listing
+                    Upload
                   </Link>
                 </Button>
               </div>
@@ -180,9 +193,21 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <div className={palette.mobile}>
             <div className="space-y-2 px-4 py-4">
-              <div className={cn('mb-3 flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium', palette.search)}>
+              <Link href="/search" onClick={() => setIsMobileMenuOpen(false)} className={cn('mb-3 flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium', palette.search)}>
                 <Search className="h-4 w-4" />
-                Find businesses, spaces, and services
+                Search decor imagery
+              </Link>
+              <div className="mb-3 grid grid-cols-2 gap-2">
+                {staticPageLinks.map(({ href, label }) => {
+                  const isActive = pathname === href || pathname.startsWith(`${href}/`)
+                  return (
+                    <Button key={href} variant="outline" size="sm" asChild className={cn('rounded-full border-[#1b4332]/18', isActive && 'border-[#1b4332] bg-[#eef4f1]')}>
+                      <Link href={href} onClick={() => setIsMobileMenuOpen(false)}>
+                        {label}
+                      </Link>
+                    </Button>
+                  )
+                })}
               </div>
               {mobileNavigation.map((item) => {
                 const isActive = pathname.startsWith(item.href)
@@ -211,13 +236,24 @@ export function Navbar() {
         <div className="flex min-w-0 flex-1 items-center gap-4 lg:gap-7">
           <Link href="/" className="flex shrink-0 items-center gap-3 whitespace-nowrap pr-2">
             <div className={cn('flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden p-1.5', style.logo)}>
-              <img src="/favicon.png?v=20260401" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
+              <img src="/favicon.png?v=20260418" alt={`${SITE_CONFIG.name} logo`} width="48" height="48" className="h-full w-full object-contain" />
             </div>
             <div className="min-w-0 hidden sm:block">
               <span className="block truncate text-xl font-semibold">{SITE_CONFIG.name}</span>
               <span className="hidden text-[10px] uppercase tracking-[0.28em] opacity-70 sm:block">{siteContent.navbar.tagline}</span>
             </div>
           </Link>
+
+          <div className="hidden shrink-0 items-center gap-1 md:flex">
+            {staticPageLinks.map(({ href, label }) => {
+              const isActive = pathname === href || pathname.startsWith(`${href}/`)
+              return (
+                <Button key={href} variant="ghost" size="sm" asChild className={cn('rounded-full px-3 text-sm font-semibold', isActive ? style.active : style.idle)}>
+                  <Link href={href}>{label}</Link>
+                </Button>
+              )
+            })}
+          </div>
 
           {isEditorial ? (
             <div className="hidden min-w-0 flex-1 items-center gap-4 xl:flex">
@@ -323,6 +359,24 @@ export function Navbar() {
               <Search className="h-4 w-4" />
               Search the site
             </Link>
+            <div className="mb-3 grid grid-cols-2 gap-2">
+              {staticPageLinks.map(({ href, label }) => {
+                const isActive = pathname === href || pathname.startsWith(`${href}/`)
+                return (
+                  <Button
+                    key={href}
+                    variant="outline"
+                    size="sm"
+                    asChild
+                    className={cn('rounded-full', isActive && 'border-primary bg-primary/5')}
+                  >
+                    <Link href={href} onClick={() => setIsMobileMenuOpen(false)}>
+                      {label}
+                    </Link>
+                  </Button>
+                )
+              })}
+            </div>
             {mobileNavigation.map((item) => {
               const isActive = pathname.startsWith(item.href)
               return (

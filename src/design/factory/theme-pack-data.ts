@@ -127,4 +127,18 @@ export const THEME_PACKS: Record<ThemePackDefinition['key'], ThemePackDefinition
     },
     notes: ['Warmer curation palette', 'Board-style modules', 'Human-curated feel'],
   },
+  'housesdecors-visual': {
+    key: 'housesdecors-visual',
+    label: 'Houses Decors Visual',
+    productFamily: 'visual',
+    brandPack: 'forest-atelier',
+    navbar: 'compact-bar',
+    footer: 'dense-footer',
+    homeLayout: 'image-profile-home',
+    motionPack: 'studio-stagger',
+    defaultTaskTemplates: {
+      image: 'image-masonry',
+    },
+    notes: ['Gallery-first rhythm', 'Forest green + warm cream', 'Trust-forward discovery'],
+  },
 }

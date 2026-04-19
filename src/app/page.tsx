@@ -39,11 +39,32 @@ const taskIcons: Record<TaskKey, any> = {
   classified: Tag,
   image: ImageIcon,
   profile: User,
+  social: Globe2,
+  comment: FileText,
+  pdf: FileText,
+  org: Building2,
 }
 
 function resolveTaskKey(value: unknown, fallback: TaskKey): TaskKey {
-  if (value === 'listing' || value === 'classified' || value === 'article' || value === 'image' || value === 'profile' || value === 'sbm') return value
+  if (
+    value === 'listing' ||
+    value === 'classified' ||
+    value === 'article' ||
+    value === 'image' ||
+    value === 'profile' ||
+    value === 'sbm' ||
+    value === 'social' ||
+    value === 'comment' ||
+    value === 'pdf' ||
+    value === 'org'
+  )
+    return value
   return fallback
+}
+
+function postTaskKey(post: SitePost, fallback: TaskKey): TaskKey {
+  const raw = (post as unknown as { task?: unknown }).task
+  return resolveTaskKey(raw, fallback)
 }
 
 function getTaskHref(task: TaskKey, slug: string) {
@@ -114,14 +135,14 @@ function getEditorialTone() {
 
 function getVisualTone() {
   return {
-    shell: 'bg-[#07101f] text-white',
-    panel: 'border border-white/10 bg-[rgba(11,18,31,0.78)] shadow-[0_28px_80px_rgba(0,0,0,0.35)]',
-    soft: 'border border-white/10 bg-white/6',
-    muted: 'text-slate-300',
-    title: 'text-white',
-    badge: 'bg-[#8df0c8] text-[#07111f]',
-    action: 'bg-[#8df0c8] text-[#07111f] hover:bg-[#77dfb8]',
-    actionAlt: 'border border-white/10 bg-white/6 text-white hover:bg-white/10',
+    shell: 'bg-[#f4f1ea] text-[#122821]',
+    panel: 'border border-[#1b4332]/12 bg-white shadow-[0_24px_70px_rgba(27,67,50,0.08)]',
+    soft: 'border border-[#1b4332]/10 bg-white/85',
+    muted: 'text-[#3d5349]',
+    title: 'text-[#0f1f18]',
+    badge: 'bg-[#1b4332] text-[#f6faf8]',
+    action: 'bg-[#1b4332] text-white hover:bg-[#143728]',
+    actionAlt: 'border border-[#1b4332]/22 bg-white text-[#1b4332] hover:bg-[#eef4f1]',
   }
 }
 
@@ -247,14 +268,14 @@ function DirectoryHome({ primaryTask, enabledTasks, listingPosts, classifiedPost
           <div className="grid gap-4 md:grid-cols-2">
             {(profilePosts.length ? profilePosts : classifiedPosts).slice(0, 4).map((post) => {
               const meta = getPostMeta(post)
-              const taskKey = resolveTaskKey(post.task, profilePosts.length ? 'profile' : 'classified')
+              const taskKey = postTaskKey(post, profilePosts.length ? 'profile' : 'classified')
               return (
                 <Link key={post.id} href={getTaskHref(taskKey, post.slug)} className={`overflow-hidden rounded-[1.8rem] ${tone.panel}`}>
                   <div className="relative h-44 overflow-hidden">
                     <ContentImage src={getPostImage(post)} alt={post.title} fill className="object-cover" />
                   </div>
                   <div className="p-5">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] opacity-70">{meta.category || post.task || 'Profile'}</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] opacity-70">{meta.category || taskKey}</p>
                     <h3 className="mt-2 text-xl font-semibold">{post.title}</h3>
                     <p className={`mt-2 text-sm leading-7 ${tone.muted}`}>{post.summary || 'Quick access to local information and related surfaces.'}</p>
                   </div>
@@ -345,8 +366,9 @@ function EditorialHome({ primaryTask, articlePosts, supportTasks }: { primaryTas
 
 function VisualHome({ primaryTask, imagePosts, profilePosts, articlePosts }: { primaryTask?: EnabledTask; imagePosts: SitePost[]; profilePosts: SitePost[]; articlePosts: SitePost[] }) {
   const tone = getVisualTone()
-  const gallery = imagePosts.length ? imagePosts.slice(0, 5) : articlePosts.slice(0, 5)
-  const creators = profilePosts.slice(0, 3)
+  const fallbackPosts = articlePosts.length ? articlePosts : profilePosts
+  const gallery = imagePosts.length ? imagePosts.slice(0, 5) : fallbackPosts.slice(0, 5)
+  const moreTiles = imagePosts.length > 5 ? imagePosts.slice(5, 11) : imagePosts.length ? imagePosts.slice(0, 6) : fallbackPosts.slice(0, 6)
 
   return (
     <main className={tone.shell}>
@@ -355,31 +377,42 @@ function VisualHome({ primaryTask, imagePosts, profilePosts, articlePosts }: { p
           <div>
             <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] ${tone.badge}`}>
               <ImageIcon className="h-3.5 w-3.5" />
-              Visual publishing system
+              Gallery & inspiration
             </span>
             <h1 className={`mt-6 max-w-4xl text-5xl font-semibold tracking-[-0.06em] sm:text-6xl ${tone.title}`}>
-              Image-led discovery with creator profiles and a more gallery-like browsing rhythm.
+              Interior and decor imagery, presented like a premium visual directory.
             </h1>
             <p className={`mt-6 max-w-2xl text-base leading-8 ${tone.muted}`}>{SITE_CONFIG.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href={primaryTask?.route || '/images'} className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${tone.action}`}>
-                Open gallery
+              <Link href={primaryTask?.route || '/images'} className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-transform duration-200 hover:-translate-y-0.5 ${tone.action}`}>
+                Browse gallery
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/profile" className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${tone.actionAlt}`}>
-                Meet creators
+              <Link href="/search" className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-transform duration-200 hover:-translate-y-0.5 ${tone.actionAlt}`}>
+                Search looks
               </Link>
+            </div>
+            <div className="mt-10 flex flex-wrap gap-2">
+              {['Living room', 'Kitchen', 'Bedroom', 'Lighting', 'Outdoor', 'Minimal'].map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/search?q=${encodeURIComponent(tag)}`}
+                  className="rounded-full border border-[#1b4332]/15 bg-white/90 px-4 py-2 text-xs font-semibold text-[#1b4332] shadow-sm transition-colors hover:border-[#1b4332]/35 hover:bg-[#eef4f1]"
+                >
+                  {tag}
+                </Link>
+              ))}
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
             {gallery.slice(0, 5).map((post, index) => (
               <Link
                 key={post.id}
-                href={getTaskHref(resolveTaskKey(post.task, 'image'), post.slug)}
+                href={getTaskHref('image', post.slug)}
                 className={index === 0 ? `col-span-2 row-span-2 overflow-hidden rounded-[2.4rem] ${tone.panel}` : `overflow-hidden rounded-[1.8rem] ${tone.soft}`}
               >
                 <div className={index === 0 ? 'relative h-[360px]' : 'relative h-[170px]'}>
-                  <ContentImage src={getPostImage(post)} alt={post.title} fill className="object-cover" />
+                  <ContentImage src={getPostImage(post)} alt={post.title} fill className="object-cover transition-transform duration-500 hover:scale-[1.03]" />
                 </div>
               </Link>
             ))}
@@ -388,18 +421,19 @@ function VisualHome({ primaryTask, imagePosts, profilePosts, articlePosts }: { p
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <div className={`rounded-[2rem] p-7 ${tone.panel}`}>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Visual notes</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">Larger media surfaces, fewer boxes, stronger pacing.</h2>
-            <p className={`mt-4 max-w-2xl text-sm leading-8 ${tone.muted}`}>This product avoids business-directory density and publication framing. The homepage behaves more like a visual board, with profile surfaces and imagery leading the experience.</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1b4332]/70">Why this layout</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">Room for the photos to breathe—then a second pass for deeper browsing.</h2>
+            <p className={`mt-4 max-w-2xl text-sm leading-8 ${tone.muted}`}>
+              The hero grid highlights a lead image, while the strip below keeps the discovery rhythm going without crowding the page. Typography stays quiet so color and texture read first.
+            </p>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {creators.map((post) => (
-              <Link key={post.id} href={`/profile/${post.slug}`} className={`rounded-[1.8rem] p-5 ${tone.soft}`}>
-                <div className="relative h-40 overflow-hidden rounded-[1.2rem]">
-                  <ContentImage src={getPostImage(post)} alt={post.title} fill className="object-cover" />
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {moreTiles.map((post) => (
+              <Link key={post.id} href={getTaskHref('image', post.slug)} className={`group overflow-hidden rounded-[1.35rem] ${tone.soft}`}>
+                <div className="relative h-36 overflow-hidden sm:h-40">
+                  <ContentImage src={getPostImage(post)} alt={post.title} fill className="object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold">{post.title}</h3>
-                <p className={`mt-2 text-sm leading-7 ${tone.muted}`}>{post.summary || 'Creator profile and visual identity surface.'}</p>
+                <p className="px-3 pb-3 pt-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#1b4332]/80 line-clamp-2">{post.title}</p>
               </Link>
             ))}
           </div>
@@ -440,7 +474,7 @@ function CurationHome({ primaryTask, bookmarkPosts, profilePosts, articlePosts }
 
           <div className="grid gap-4 md:grid-cols-2">
             {collections.map((post) => (
-              <Link key={post.id} href={getTaskHref(resolveTaskKey(post.task, 'sbm'), post.slug)} className={`rounded-[1.8rem] p-6 ${tone.panel}`}>
+              <Link key={post.id} href={getTaskHref(postTaskKey(post, 'sbm'), post.slug)} className={`rounded-[1.8rem] p-6 ${tone.panel}`}>
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Collection</p>
                 <h3 className="mt-3 text-2xl font-semibold">{post.title}</h3>
                 <p className={`mt-3 text-sm leading-8 ${tone.muted}`}>{post.summary || 'A calmer bookmark surface with room for context and grouping.'}</p>

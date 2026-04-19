@@ -11,6 +11,7 @@ export type ThemePackKey =
   | 'visual-portfolio'
   | 'curation-library'
   | 'curation-warm'
+  | 'housesdecors-visual'
 
 export type SiteRecipe = {
   productFamily: ProductFamily
@@ -39,7 +40,7 @@ export type ThemePackDefinition = {
   key: ThemePackKey
   label: string
   productFamily: ProductFamily
-  brandPack: 'editorial-luxe' | 'directory-clean' | 'studio-dark' | 'market-utility'
+  brandPack: 'editorial-luxe' | 'directory-clean' | 'studio-dark' | 'market-utility' | 'forest-atelier'
   navbar: NavbarLayoutKey
   footer: FooterLayoutKey
   homeLayout: HomeLayoutKey
