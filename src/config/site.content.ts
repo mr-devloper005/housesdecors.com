@@ -2,7 +2,7 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Interior inspiration, image-first',
+    tagline: '',
   },
   footer: {
     tagline: 'Curated home & decor imagery',

@@ -11,6 +11,9 @@ export const generateMetadata = () =>
     description: taskPageMetadata.image.description,
   });
 
-export default function ImageSharingPage({ searchParams }: { searchParams?: { category?: string } }) {
-  return <TaskListPage task="image" category={searchParams?.category} />;
+type TaskPageSearchParams = Promise<{ category?: string }> | { category?: string };
+
+export default async function ImageSharingPage({ searchParams }: { searchParams?: TaskPageSearchParams }) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  return <TaskListPage task="image" category={resolvedSearchParams?.category} />;
 }
