@@ -46,7 +46,7 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
     >
       <Link href={`/articles/${article.slug}`}>
         <Card className={cn(
-          'group overflow-hidden border-border bg-card transition-all hover:border-muted-foreground/20'
+          'group overflow-hidden border-border/70 bg-card/95 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/60 hover:shadow-[0_20px_55px_rgba(120,53,15,0.14)]'
         )}>
           <div className={cn(
             'relative overflow-hidden bg-muted',
@@ -133,7 +133,7 @@ export function ListingCard({ listing }: { listing: Listing }) {
       transition={{ duration: 0.2 }}
     >
       <Link href={`/listings/${listing.slug}`}>
-        <Card className="group overflow-hidden border-border bg-card transition-all hover:border-muted-foreground/20">
+        <Card className="group overflow-hidden border-border/70 bg-card/95 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/60 hover:shadow-[0_20px_55px_rgba(120,53,15,0.14)]">
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
               src={listing.images[0]}
@@ -149,7 +149,7 @@ export function ListingCard({ listing }: { listing: Listing }) {
             <Button
               variant="secondary"
               size="icon"
-              className="absolute right-3 top-3 h-8 w-8 rounded-full opacity-0 transition-opacity group-hover:opacity-100"
+              className="absolute right-3 top-3 h-8 w-8 rounded-full border border-white/60 bg-white/90 opacity-0 shadow-sm transition-opacity group-hover:opacity-100"
               onClick={(e) => {
                 e.preventDefault()
                 const next = !isSaved
@@ -235,7 +235,7 @@ export function ClassifiedAdCard({ ad }: { ad: ClassifiedAd }) {
       transition={{ duration: 0.2 }}
     >
       <Link href={`/classifieds/${ad.slug}`}>
-        <Card className="group overflow-hidden border-border bg-card transition-all hover:border-muted-foreground/20">
+        <Card className="group overflow-hidden border-border/70 bg-card/95 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/60 hover:shadow-[0_20px_55px_rgba(120,53,15,0.14)]">
           <div className="relative aspect-square overflow-hidden">
             <Image
               src={ad.images[0]}
@@ -298,7 +298,7 @@ export function ProfileCard({ user, compact = false }: { user: User; compact?: b
       transition={{ duration: 0.2 }}
     >
       <Link href={`/profile/${user.id}`}>
-        <Card className="group overflow-hidden border-border bg-card transition-all hover:border-muted-foreground/20">
+        <Card className="group overflow-hidden border-border/70 bg-card/95 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/60 hover:shadow-[0_20px_55px_rgba(120,53,15,0.14)]">
           <CardContent className={cn('flex items-center gap-4', compact ? 'p-3' : 'p-5')}>
             <Avatar className={cn(compact ? 'h-10 w-10' : 'h-14 w-14')}>
               <AvatarImage src={user.avatar} alt={user.name} />
@@ -350,7 +350,7 @@ export function StatsCard({
   }
 
   return (
-    <Card className="border-border bg-card">
+    <Card className="border-border/70 bg-card/95 transition-all duration-300 hover:border-amber-300/60 hover:shadow-[0_18px_45px_rgba(120,53,15,0.12)]">
       <CardContent className="p-5">
         <div className="flex items-center justify-between">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
