@@ -27,7 +27,7 @@ export default function PressPage() {
             <div>
               <h2 className="text-xl font-semibold text-[#0f1f18]">Press kit</h2>
               <p className="mt-2 text-sm leading-relaxed text-[#3d5349]">
-                Download lockups and UI captures in formats ready for print and digital. Need something bespoke? Email press@ from the contact page.
+                Download lockups and UI captures in formats ready for print and digital. Need something bespoke? Email {process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'press@housesdecors.com'} from the contact page.
               </p>
             </div>
             <div className="grid gap-3">
