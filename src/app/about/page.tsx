@@ -4,8 +4,6 @@ import { PageShell } from '@/components/shared/page-shell'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { mockTeamMembers } from '@/data/mock-data'
 import { SITE_CONFIG } from '@/lib/site-config'
 
 const highlights = [
@@ -99,34 +97,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="mt-14">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8d7f5e]">People behind the pixels</p>
-        <h2 className="mt-2 text-2xl font-semibold text-[#0f1f18] sm:text-3xl">Small team, obsessive about craft</h2>
-        <p className="mt-3 max-w-2xl text-sm text-[#3d5349]">Editors, photographers, and engineers who care how a room feels on screen—not just how many clicks it gets.</p>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {mockTeamMembers.map((member) => (
-            <Card
-              key={member.id}
-              className="rounded-[1.5rem] border-[#1b4332]/10 bg-white/95 shadow-[0_14px_40px_rgba(27,67,50,0.05)] transition-transform duration-200 hover:-translate-y-1"
-            >
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3">
-                  <Avatar className="h-12 w-12 border border-[#1b4332]/10">
-                    <AvatarImage src={member.avatar} alt={member.name} />
-                    <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="text-sm font-semibold text-[#0f1f18]">{member.name}</p>
-                    <p className="text-xs text-[#5a6f66]">{member.role}</p>
-                  </div>
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-[#3d5349]">{member.bio}</p>
-                <p className="mt-3 text-xs font-medium text-[#8d7f5e]">{member.location}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
     </PageShell>
   )
 }
