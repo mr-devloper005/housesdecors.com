@@ -37,14 +37,9 @@ export default function AboutPage() {
       title={`About ${SITE_CONFIG.name}`}
       description={`${SITE_CONFIG.name} is a gallery-led destination for interior inspiration: curated rooms, honest materials, and a browsing rhythm that respects your eye.`}
       actions={
-        <>
-          <Button variant="outline" asChild className="rounded-full border-[#1b4332]/20 bg-white/80">
-            <Link href="/team">Meet the team</Link>
-          </Button>
-          <Button asChild className="rounded-full bg-[#1b4332] hover:bg-[#143728]">
-            <Link href="/contact">Contact</Link>
-          </Button>
-        </>
+        <Button asChild className="rounded-full bg-[#1b4332] hover:bg-[#143728]">
+          <Link href="/contact">Contact</Link>
+        </Button>
       }
     >
       <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
