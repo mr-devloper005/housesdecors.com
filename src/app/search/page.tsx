@@ -45,9 +45,12 @@ export default async function SearchPage({
         : SITE_CONFIG.tasks.flatMap((task) => getMockPostsForTask(task.key));
 
   const filtered = posts.filter((post) => {
+    const postTask = getPostTaskKey(post);
+    if (postTask === "profile") return false;
+
     const content = post.content && typeof post.content === "object" ? post.content : {};
     const typeText = compactText((content as any).type);
-    if (typeText === "comment") return false;
+    if (typeText === "comment" || typeText === "profile") return false;
     const description = compactText((content as any).description);
     const body = compactText((content as any).body);
     const excerpt = compactText((content as any).excerpt);
@@ -103,6 +106,7 @@ export default async function SearchPage({
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {results.map((post) => {
             const task = getPostTaskKey(post);
+            if (task === "profile") return null;
             const href = task ? buildPostUrl(task, post.slug) : `/posts/${post.slug}`;
             return <TaskPostCard key={post.id} post={post} href={href} />;
           })}

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FileText, Building2, LayoutGrid, Tag, Github, Twitter, Linkedin, Image as ImageIcon, User, ArrowRight, Sparkles } from 'lucide-react'
+import { FileText, Building2, LayoutGrid, Tag, Image as ImageIcon, User, ArrowRight, Sparkles } from 'lucide-react'
 import { SITE_CONFIG, type TaskKey } from '@/lib/site-config'
 import { siteContent } from '@/config/site.content'
 import { getFactoryState } from '@/design/factory/get-factory-state'
@@ -45,11 +45,6 @@ const footerLinks = {
   ],
 }
 
-const socialLinks = [
-  { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
-  { name: 'GitHub', href: 'https://github.com', icon: Github },
-  { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
-]
 
 export function Footer() {
   if (FOOTER_OVERRIDE_ENABLED) {
@@ -120,17 +115,7 @@ export function Footer() {
                   ))}
                 </ul>
               </div>
-              <div>
-                <h3 className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-100/60">Connect</h3>
-                <div className="mt-4 flex gap-3">
-                  {socialLinks.map((item) => (
-                    <Link key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/15 bg-white/8 p-2.5 text-emerald-50 transition-colors hover:bg-white/14 hover:text-white">
-                      <item.icon className="h-4 w-4" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
+                          </div>
           </div>
           <div className="mt-10 border-t border-white/10 pt-5 text-sm text-emerald-100/65">&copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.</div>
         </div>

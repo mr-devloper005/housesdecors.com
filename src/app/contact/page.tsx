@@ -107,14 +107,7 @@ export default function ContactPage() {
             <p className={`mt-3 text-sm ${tone.muted}`}>
               Prefer email? This address is managed from the environment file so it can be updated without changing the page code.
             </p>
-            <a
-              href={`mailto:${contactEmail}`}
-              className="mt-4 inline-flex h-12 items-center justify-center gap-2 rounded-full border-2 border-[#1b4332] px-6 text-sm font-semibold text-[#1b4332] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[#1b4332]/5"
-            >
-              <Mail className="h-4 w-4" />
-              {contactEmail}
-            </a>
-            <form className="mt-6 grid gap-4">
+                        <form className="mt-6 grid gap-4">
               <input className="h-12 rounded-xl border border-[#1b4332]/15 bg-white px-4 text-sm text-[#0f1f18] placeholder:text-[#5a6f66]" placeholder="Your name" />
               <input className="h-12 rounded-xl border border-[#1b4332]/15 bg-white px-4 text-sm text-[#0f1f18] placeholder:text-[#5a6f66]" placeholder="Email address" type="email" />
               <input className="h-12 rounded-xl border border-[#1b4332]/15 bg-white px-4 text-sm text-[#0f1f18] placeholder:text-[#5a6f66]" placeholder="Topic (e.g. press, partnership, support)" />
