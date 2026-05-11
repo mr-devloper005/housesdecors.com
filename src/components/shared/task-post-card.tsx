@@ -274,27 +274,7 @@ export function TaskPostCard({
 
   if (experience.key === "housesdecors") {
     if (variant === "profile") {
-      return (
-        <Link href={href} className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-amber-200 bg-[#fffdf8] shadow-[0_24px_70px_rgba(120,53,15,0.09)]">
-          <div className="relative aspect-[16/10] overflow-hidden bg-amber-100">
-            <ContentImage src={image} alt={altText} fill className="object-cover transition duration-500 group-hover:scale-[1.04]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#2a1a10]/55 via-transparent to-transparent" />
-          </div>
-          <div className="flex flex-1 items-start gap-4 p-5">
-            <div className="relative h-16 w-16 flex-none overflow-hidden rounded-[1.25rem] border border-amber-200 bg-white shadow-sm">
-              <ContentImage src={image} alt={altText} fill className="object-cover" />
-            </div>
-            <div className="min-w-0">
-              <span className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] ${experience.badgeClass}`}>
-                {category}
-              </span>
-              <h3 className="mt-3 text-[1.35rem] font-semibold leading-tight text-amber-950">{post.title}</h3>
-              <p className={`mt-3 text-sm leading-7 ${experience.mutedClass}`}>{excerpt}</p>
-              <MetaRow category={category} location={location} email={content.email} mutedClass={experience.mutedClass} />
-            </div>
-          </div>
-        </Link>
-      );
+      return null;
     }
 
     return (
